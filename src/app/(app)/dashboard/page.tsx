@@ -22,6 +22,7 @@ function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
+  const [profileUrl, setProfileUrl] = useState("");
 
   const handleDeleteMessage = (messageId: string) => {
     setMessages(messages.filter((message) => message._id !== messageId));
@@ -75,6 +76,13 @@ function UserDashboard() {
     if (!session || !session.user) return;
     fetchMessages();
     fetchAcceptMessages();
+
+    // Set profile URL only on the client side
+    if (typeof window !== "undefined") {
+      const { username } = session.user as User;
+      const baseUrl = `${window.location.protocol}//${window.location.host}`;
+      setProfileUrl(`${baseUrl}/u/${username}`);
+    }
   }, [session, fetchAcceptMessages, fetchMessages]);
 
   const handleSwitchChange = async () => {
@@ -97,8 +105,6 @@ function UserDashboard() {
   }
 
   const { username } = session.user as User;
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  const profileUrl = `${baseUrl}/u/${username}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl);
