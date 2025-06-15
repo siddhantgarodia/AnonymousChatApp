@@ -70,6 +70,13 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
 
+    async redirect({ url, baseUrl }) {
+      if (url === "/" || url.startsWith(baseUrl)) {
+        return baseUrl + "/dashboard";
+      }
+      return baseUrl;
+    },
+
     async session({ session, token }) {
       if (token && session.user) {
         session.user._id = token._id;
