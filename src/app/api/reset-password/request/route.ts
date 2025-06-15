@@ -5,6 +5,8 @@ import { resetPasswordRequestSchema } from "@/schemas/resetPasswordSchema";
 import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
 import crypto from "crypto";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   if (request.method !== "POST") {
     return NextResponse.json(

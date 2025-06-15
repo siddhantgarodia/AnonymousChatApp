@@ -5,6 +5,8 @@ import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
 import crypto from "crypto";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 // Define schema for resend verification
 const resendVerificationSchema = z.object({
   username: z.string().min(1, { message: "Username is required" }),

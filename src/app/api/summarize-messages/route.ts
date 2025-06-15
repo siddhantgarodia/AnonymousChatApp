@@ -6,6 +6,8 @@ import UserModel from "@/model/User";
 import mongoose from "mongoose";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+export const dynamic = "force-dynamic";
+
 // Do NOT use edge runtime (default is fine)
 export async function POST(request: Request) {
   try {

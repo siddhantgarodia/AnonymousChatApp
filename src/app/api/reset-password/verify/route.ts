@@ -4,6 +4,8 @@ import { NextResponse } from "next/server";
 import { resetPasswordVerifySchema } from "@/schemas/resetPasswordSchema";
 import bcrypt from "bcryptjs";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   if (request.method !== "POST") {
     return NextResponse.json(

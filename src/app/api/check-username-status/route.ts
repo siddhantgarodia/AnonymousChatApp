@@ -8,6 +8,8 @@ const UsernameQuerySchema = z.object({
   username: usernameValidation,
 });
 
+export const dynamic = "force-dynamic";
+
 /**
  * API endpoint to check if a username exists and accepts messages
  * @param request - Next.js request object with username query parameter
