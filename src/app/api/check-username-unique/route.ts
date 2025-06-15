@@ -8,7 +8,11 @@ const UsernameQuerySchema = z.object({
   username: usernameValidation,
 });
 
+// This explicitly sets the route to be dynamically rendered at request time
+// and not statically optimized at build time
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+export const revalidate = 0;
 
 export async function GET(request: NextRequest) {
   await dbConnect();

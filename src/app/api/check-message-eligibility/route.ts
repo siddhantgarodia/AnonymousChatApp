@@ -4,7 +4,11 @@ import { z } from "zod";
 import { usernameValidation } from "@/schemas/signUpSchema";
 import { NextRequest } from "next/server";
 
+// This explicitly sets the route to be dynamically rendered at request time
+// and not statically optimized at build time
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+export const revalidate = 0;
 
 const UsernameQuerySchema = z.object({
   username: usernameValidation,
