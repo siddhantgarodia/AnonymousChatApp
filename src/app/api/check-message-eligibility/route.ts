@@ -4,20 +4,14 @@ import { z } from "zod";
 import { usernameValidation } from "@/schemas/signUpSchema";
 import { NextRequest } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 const UsernameQuerySchema = z.object({
   username: usernameValidation,
 });
 
 /**
  * API endpoint to check if a username exists and accepts messages
- * This endpoint is specifically designed to be used before sending messages
- * 
- * @param request - Next.js request object with username query parameter
- * @returns Response object with:
- *   - success: boolean indicating if the operation was successful
- *   - exists: boolean indicating if username exists
- *   - acceptsMessages: boolean indicating if user accepts messages
- *   - message: descriptive message for UI display
  */
 export async function GET(request: NextRequest) {
   await dbConnect();
@@ -35,9 +29,10 @@ export async function GET(request: NextRequest) {
           success: false,
           exists: false,
           acceptsMessages: false,
-          message: usernameErrors.length > 0
-            ? usernameErrors.join(", ")
-            : "Invalid username format.",
+          message:
+            usernameErrors.length > 0
+              ? usernameErrors.join(", ")
+              : "Invalid username format.",
         },
         { status: 400 }
       );
@@ -47,24 +42,22 @@ export async function GET(request: NextRequest) {
 
     // Find user and check if verified
     const existingUser = await UserModel.findOne({
-      username: new RegExp(`^${validatedUsername}$`, "i"), // Case-insensitive match
+      username: new RegExp(`^${validatedUsername}$`, "i"),
       isVerified: true,
     });
 
-    // If user doesn't exist, return appropriate response
     if (!existingUser) {
       return Response.json(
         {
-          success: true, // API call was successful even though user wasn't found
+          success: true,
           exists: false,
           acceptsMessages: false,
           message: "Username does not exist or is not verified.",
         },
-        { status: 200 } // Using 200 because this is a valid result, not an error
+        { status: 200 }
       );
     }
 
-    // User exists, return their message acceptance status
     return Response.json(
       {
         success: true,
@@ -83,7 +76,8 @@ export async function GET(request: NextRequest) {
         success: false,
         exists: false,
         acceptsMessages: false,
-        message: "An error occurred while checking if this user can receive messages.",
+        message:
+          "An error occurred while checking if this user can receive messages.",
       },
       { status: 500 }
     );
