@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Message from someone",
+    "content": "Hey! Hope you're having a great day 😊",
+    "received": "10 minutes ago"
+  },
+  {
+    "title": "Anonymous note",
+    "content": "Your recent post made me smile. Keep it up!",
+    "received": "2 hours ago"
+  },
+  {
+    "title": "Just a hello",
+    "content": "Got any good book recommendations lately?",
+    "received": "1 day ago"
+  },
+  {
+    "title": "Quick question",
+    "content": "What's one song you can listen to on repeat?",
+    "received": "3 days ago"
+  },
+  {
+    "title": "Message from a friendly stranger",
+    "content": "If you could visit any place in the world, where would it be?",
+    "received": "5 days ago"
+  }
+]
