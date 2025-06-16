@@ -5,11 +5,19 @@ import { MessageSummary } from "@/components/MessageSummary";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
+import { Input } from "@/components/ui/input";
 import { Message } from "@/model/User";
 import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
-import { Loader2, RefreshCcw, MessageCircleX, KeyRound } from "lucide-react";
+import {
+  Loader2,
+  RefreshCcw,
+  MessageCircleX,
+  KeyRound,
+  MessageCircle,
+  X,
+} from "lucide-react";
 import { User } from "next-auth";
 import { useSession } from "next-auth/react";
 import React, { useCallback, useEffect, useState } from "react";
@@ -23,9 +31,24 @@ function UserDashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
   const [profileUrl, setProfileUrl] = useState("");
+  const [showUsernameInput, setShowUsernameInput] = useState(false);
+  const [inputUsername, setInputUsername] = useState("");
+  const [usernameError, setUsernameError] = useState("");
 
   const handleDeleteMessage = (messageId: string) => {
     setMessages(messages.filter((message) => message._id !== messageId));
+  };
+
+  const handleSendMessage = () => {
+    if (!inputUsername || inputUsername.trim() === "") {
+      setUsernameError("Please enter a username");
+      return;
+    }
+
+    setUsernameError("");
+    router.push(`/u/${inputUsername.trim()}`);
+    setShowUsernameInput(false);
+    setInputUsername("");
   };
 
   const { data: session } = useSession();
@@ -40,6 +63,55 @@ function UserDashboard() {
 
   const { register, watch, setValue } = form;
   const acceptMessages = watch("acceptMessages");
+
+  // Username dialog component
+  const UsernameInputDialog = () => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-300 dark:border-gray-700 shadow-xl w-full max-w-sm">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100">
+            Send Anonymous Message
+          </h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-8 w-8 p-0"
+            onClick={() => {
+              setShowUsernameInput(false);
+              setInputUsername("");
+              setUsernameError("");
+            }}
+          >
+            <X size={16} />
+          </Button>
+        </div>
+        <div className="space-y-4">
+          <div>
+            <Input
+              placeholder="Enter username"
+              value={inputUsername}
+              onChange={(e) => setInputUsername(e.target.value)}
+              className={usernameError ? "border-red-500" : ""}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSendMessage();
+              }}
+              autoFocus
+            />
+            {usernameError && (
+              <p className="text-xs text-red-500 mt-1">{usernameError}</p>
+            )}
+          </div>
+          <Button
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+            onClick={handleSendMessage}
+          >
+            <MessageCircle size={16} className="mr-2" />
+            Continue
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
 
   const fetchAcceptMessages = useCallback(async () => {
     setIsSwitchLoading(true);
@@ -113,6 +185,8 @@ function UserDashboard() {
 
   return (
     <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-sm w-full max-w-6xl">
+      {showUsernameInput && <UsernameInputDialog />}
+
       <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100">
         User Dashboard
       </h1>
@@ -169,26 +243,45 @@ function UserDashboard() {
 
       <Separator className="my-4" />
 
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+        <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-2 sm:mb-0">
+          Send a Message
+        </h2>
+        <div className="flex gap-2">
+          <Button
+            onClick={() => setShowUsernameInput(true)}
+            className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md py-3 transition-all duration-200"
+          >
+            <MessageCircle className="h-5 w-5" />
+            Send a Message
+          </Button>
+        </div>
+      </div>
+
+      <Separator className="my-4" />
+
       {/* Header + Refresh */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-2 sm:mb-0">
           Your Messages
         </h2>
-        <Button
-          variant="outline"
-          onClick={(e) => {
-            e.preventDefault();
-            fetchMessages(true);
-          }}
-          className="flex items-center bg-white dark:bg-gray-800 border-blue-200 dark:border-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:hover:bg-gray-700"
-        >
-          {isLoading ? (
-            <Loader2 className="h-4 w-4 animate-spin mr-2 text-blue-600" />
-          ) : (
-            <RefreshCcw className="h-4 w-4 mr-2 text-blue-600" />
-          )}
-          Refresh Messages
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            onClick={(e) => {
+              e.preventDefault();
+              fetchMessages(true);
+            }}
+            className="flex items-center bg-white dark:bg-gray-800 border-blue-200 dark:border-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:hover:bg-gray-700"
+          >
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin mr-2 text-blue-600" />
+            ) : (
+              <RefreshCcw className="h-4 w-4 mr-2 text-blue-600" />
+            )}
+            Refresh Messages
+          </Button>
+        </div>
       </div>
 
       {/* Message Summary */}
@@ -214,10 +307,20 @@ function UserDashboard() {
             </div>
             <p className="text-gray-600 dark:text-gray-300 font-medium mb-2">
               No messages to display yet.
-            </p>
+            </p>{" "}
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
               Share your profile link to receive anonymous messages.
             </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-3">
+              {" "}
+              <Button
+                onClick={() => setShowUsernameInput(true)}
+                className="flex items-center bg-blue-600 text-white hover:bg-blue-700"
+              >
+                <MessageCircle className="h-4 w-4 mr-2" />
+                Send a Message
+              </Button>
+            </div>
             {acceptMessages ? (
               <div className="text-xs text-green-600 dark:text-green-400 inline-block px-3 py-1 bg-green-50 dark:bg-green-900 rounded-full border border-green-100 dark:border-green-700">
                 Message receiving is active
@@ -230,6 +333,7 @@ function UserDashboard() {
           </div>
         )}{" "}
       </div>
+      <Separator className="my-6" />
       {/* Change Password Section */}
       <div className="mb-6 bg-slate-50 dark:bg-gray-800 p-4 rounded-lg">
         <h2 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-100">

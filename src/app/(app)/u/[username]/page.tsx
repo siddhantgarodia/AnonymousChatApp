@@ -273,7 +273,8 @@ export default function SendMessage() {
                     <Button
                       key={index}
                       variant="outline"
-                      className="text-left h-auto py-3 px-4 justify-start border-border hover:bg-muted transition-all duration-200"
+                      className="text-left h-auto py-3 px-4 justify-start border-border hover:bg-muted transition-all duration-200 
+                     break-words whitespace-pre-wrap w-full max-w-full overflow-hidden"
                       onClick={() => handleMessageClick(message)}
                     >
                       {message}

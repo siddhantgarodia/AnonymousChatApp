@@ -25,9 +25,7 @@ const Navbar = () => {
             <MessageCircle className="w-6 h-6 text-primary" />
             <span className="hidden sm:inline text-xl font-bold tracking-tight text-foreground">
               <span className="font-extrabold text-foreground">Anony</span>
-              <span>
-                <span className="font-extrabold text-primary">Chat</span>
-              </span>
+              <span className="font-extrabold text-primary">Chat</span>
             </span>
             <span className="sm:hidden text-lg font-bold text-foreground">
               AC
