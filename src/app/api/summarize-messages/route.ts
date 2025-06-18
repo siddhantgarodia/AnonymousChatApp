@@ -70,17 +70,18 @@ export async function POST(request: Request) {
 
     // 5. Build prompt for Gemini
     const prompt = `
-Summarize the following anonymous messages sent to a user on a messaging platform.
+Summarize the following anonymous feedback sent to a user on the Honest-Feedback platform.
 Please identify:
-- Main themes or topics in the messages
+- Main themes or topics in the feedback
 - Overall tone (positive, negative, neutral, mixed)
-- Any frequently asked questions or recurring topics
-- Any notable or interesting patterns
+- Any frequently mentioned areas for improvement
+- Any notable strengths or positive patterns
+- Any actionable insights
 
 Format the summary as 3-5 clear bullet points.
 Be concise, insightful, and focus on the most meaningful observations.
 
-Messages:
+Feedback:
 ${messageTexts}
 `;
 
@@ -105,17 +106,14 @@ ${messageTexts}
         { success: false, message: "No output from Gemini" },
         { status: 500 }
       );
-    }    // IMPORTANT: useCompletion expects a specific JSON format
+    } // IMPORTANT: useCompletion expects a specific JSON format
     // The format is: { text: "content" }
     // But we need to return it as a proper JSON response
-    return new Response(
-      JSON.stringify({ text: summaryText }),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    return new Response(JSON.stringify({ text: summaryText }), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     console.error("Error summarizing messages:", error);
     return NextResponse.json(

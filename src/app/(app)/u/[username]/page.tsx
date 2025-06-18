@@ -143,7 +143,7 @@ export default function SendMessage() {
   return (
     <div className="container mx-auto my-8 p-6 bg-card rounded-lg shadow-sm max-w-4xl">
       <h1 className="text-4xl font-bold mb-6 text-center text-foreground">
-        Send an Anonymous Message
+        Send Honest Feedback
       </h1>
 
       {isCheckingUser ? (
@@ -163,7 +163,7 @@ export default function SendMessage() {
       ) : !isAcceptingMessages ? (
         <div className="text-center p-8 bg-muted rounded-lg">
           <p className="text-xl mb-4 text-muted-foreground">
-            @{username} is not accepting messages at this time.
+            @{username} is not accepting feedback at this time.
           </p>
           <Link href="/">
             <Button className="mt-2">Back to Home</Button>
@@ -183,14 +183,14 @@ export default function SendMessage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-lg font-medium text-foreground">
-                        Send Anonymous Message to{" "}
+                        Send Feedback to{" "}
                         <span className="text-primary font-semibold">
                           @{username}
                         </span>
                       </FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="Write your anonymous message here..."
+                          placeholder="Write your honest feedback here..."
                           className="resize-none min-h-[120px] bg-background text-foreground border-border focus:border-ring focus:ring-ring shadow-inner"
                           {...field}
                         />
@@ -216,7 +216,7 @@ export default function SendMessage() {
                       disabled={!messageContent}
                       className="px-8 bg-primary text-primary-foreground hover:bg-primary/90"
                     >
-                      Send Anonymous Message
+                      Send Feedback
                     </Button>
                   )}
                 </div>
@@ -295,7 +295,7 @@ export default function SendMessage() {
       <Separator className="my-6" />
       <div className="text-center bg-muted p-6 rounded-lg">
         <div className="mb-4 font-medium text-foreground">
-          Want your own anonymous message board?
+          Want your own feedback page?
         </div>
         <Link href="/sign-up">
           <Button className="px-6">Create Your Account</Button>

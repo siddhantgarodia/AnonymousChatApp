@@ -95,10 +95,11 @@ export default function SignUpForm() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-background text-foreground transition-colors px-4">
       <div className="w-full max-w-md space-y-8 bg-card text-card-foreground rounded-lg shadow-lg border p-8 transition-colors">
+        {" "}
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-2">AnonyChat</h1>
+          <h1 className="text-4xl font-bold mb-2">Honest-Feedback</h1>
           <p className="text-muted-foreground text-sm">
-            Send messages anonymously
+            Share and receive honest feedback anonymously
           </p>
         </div>
         <Form {...form}>

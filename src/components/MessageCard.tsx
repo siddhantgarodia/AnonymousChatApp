@@ -23,7 +23,7 @@ import { ApiResponse } from "@/types/ApiResponse";
 
 type MessageCardProps = {
   message: Message;
-  onMessageDelete: (messageId: string) => void;
+  onMessageDelete: (feedbackId: string) => void;
 };
 
 export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
@@ -32,17 +32,17 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
       const response = await axios.delete<ApiResponse>(
         `/api/delete-message/${message._id}`
       );
-      toast.success(response.data.message || "Message deleted successfully");
+      toast.success(response.data.message || "Feedback deleted successfully");
       onMessageDelete(message._id as string);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast.error(
-        axiosError.response?.data.message || "Failed to delete message"
+        axiosError.response?.data.message || "Failed to delete feedback"
       );
     }
   };
   return (
-    <Card className="message-card group transition-shadow hover:shadow-md border border-border/50 dark:border-border/30 bg-background/90 dark:bg-background/70 backdrop-blur-sm rounded-2xl">
+    <Card className="feedback-card group transition-shadow hover:shadow-md border border-border/50 dark:border-border/30 bg-background/90 dark:bg-background/70 backdrop-blur-sm rounded-2xl">
       <CardHeader className="pb-3">
         <div className="flex justify-between items-start gap-2">
           <div className="flex-1">

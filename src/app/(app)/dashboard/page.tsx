@@ -34,9 +34,8 @@ function UserDashboard() {
   const [showUsernameInput, setShowUsernameInput] = useState(false);
   const [inputUsername, setInputUsername] = useState("");
   const [usernameError, setUsernameError] = useState("");
-
-  const handleDeleteMessage = (messageId: string) => {
-    setMessages(messages.filter((message) => message._id !== messageId));
+  const handleDeleteMessage = (feedbackId: string) => {
+    setMessages(messages.filter((message) => message._id !== feedbackId));
   };
 
   const handleSendMessage = () => {
@@ -70,7 +69,7 @@ function UserDashboard() {
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-300 dark:border-gray-700 shadow-xl w-full max-w-sm">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100">
-            Send Anonymous Message
+            Share Anonymous Feedback
           </h3>
           <Button
             variant="ghost"
@@ -194,7 +193,7 @@ function UserDashboard() {
       {/* Copy Link */}
       <div className="mb-6 bg-slate-50 dark:bg-gray-800 p-4 rounded-lg">
         <h2 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-100">
-          Share your profile to receive messages
+          Share your profile to receive feedback
         </h2>
         <div className="flex items-center">
           <input
@@ -209,8 +208,8 @@ function UserDashboard() {
         </div>
       </div>
 
-      {/* Accept Messages Toggle */}
-      <div className="mb-6 flex items-center justify-between bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 p-5 rounded-lg border border-blue-100 dark:border-gray-700 shadow-sm">
+      {/* Accept Feedback Toggle */}
+      <div className="mb-6 flex items-center justify-between bg-gradient-to-r from-orange-50 to-amber-50 dark:from-gray-800 dark:to-gray-700 p-5 rounded-lg border border-orange-100 dark:border-gray-700 shadow-sm">
         <div className="flex items-center">
           <Switch
             {...register("acceptMessages")}
@@ -220,8 +219,8 @@ function UserDashboard() {
             className="mr-3"
           />
           <div>
-            <span className="font-medium text-blue-800 dark:text-blue-300">
-              Accept Messages:
+            <span className="font-medium text-orange-800 dark:text-orange-300">
+              Accept Feedback:
             </span>
             <span
               className={`ml-1 font-semibold ${
@@ -236,8 +235,8 @@ function UserDashboard() {
         </div>
         <div className="text-sm text-gray-500 dark:text-gray-400">
           {acceptMessages
-            ? "Users can send you anonymous messages"
-            : "Message receiving is turned off"}
+            ? "Users can send you honest feedback"
+            : "Feedback receiving is turned off"}
         </div>
       </div>
 
@@ -245,15 +244,15 @@ function UserDashboard() {
 
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-2 sm:mb-0">
-          Send a Message
+          Give Feedback
         </h2>
         <div className="flex gap-2">
           <Button
             onClick={() => setShowUsernameInput(true)}
-            className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md py-3 transition-all duration-200"
+            className="w-full flex items-center justify-center gap-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg shadow-md py-3 transition-all duration-200"
           >
             <MessageCircle className="h-5 w-5" />
-            Send a Message
+            Give Feedback
           </Button>
         </div>
       </div>
@@ -263,7 +262,7 @@ function UserDashboard() {
       {/* Header + Refresh */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-2 sm:mb-0">
-          Your Messages
+          Your Feedback
         </h2>
         <div className="flex gap-2">
           <Button
@@ -272,14 +271,14 @@ function UserDashboard() {
               e.preventDefault();
               fetchMessages(true);
             }}
-            className="flex items-center bg-white dark:bg-gray-800 border-blue-200 dark:border-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:hover:bg-gray-700"
+            className="flex items-center bg-white dark:bg-gray-800 border-orange-200 dark:border-gray-700 hover:border-orange-300 hover:bg-orange-50 dark:hover:bg-gray-700"
           >
             {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin mr-2 text-blue-600" />
+              <Loader2 className="h-4 w-4 animate-spin mr-2 text-orange-600" />
             ) : (
-              <RefreshCcw className="h-4 w-4 mr-2 text-blue-600" />
+              <RefreshCcw className="h-4 w-4 mr-2 text-orange-600" />
             )}
-            Refresh Messages
+            Refresh Feedback
           </Button>
         </div>
       </div>
@@ -298,7 +297,7 @@ function UserDashboard() {
             />
           ))
         ) : (
-          <div className="col-span-2 text-center py-12 bg-gradient-to-r from-slate-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-lg border border-blue-100 dark:border-gray-700 shadow-sm">
+          <div className="col-span-2 text-center py-12 bg-gradient-to-r from-slate-50 to-orange-50 dark:from-gray-800 dark:to-gray-700 rounded-lg border border-orange-100 dark:border-gray-700 shadow-sm">
             <div className="flex justify-center mb-4">
               <MessageCircleX
                 size={64}
@@ -306,10 +305,10 @@ function UserDashboard() {
               />
             </div>
             <p className="text-gray-600 dark:text-gray-300 font-medium mb-2">
-              No messages to display yet.
+              No feedback to display yet.
             </p>{" "}
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-              Share your profile link to receive anonymous messages.
+              Share your profile link to receive honest feedback.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-3">
               {" "}
@@ -318,16 +317,16 @@ function UserDashboard() {
                 className="flex items-center bg-blue-600 text-white hover:bg-blue-700"
               >
                 <MessageCircle className="h-4 w-4 mr-2" />
-                Send a Message
+                Send a Feedback
               </Button>
             </div>
             {acceptMessages ? (
               <div className="text-xs text-green-600 dark:text-green-400 inline-block px-3 py-1 bg-green-50 dark:bg-green-900 rounded-full border border-green-100 dark:border-green-700">
-                Message receiving is active
+                Feedback receiving is active
               </div>
             ) : (
               <div className="text-xs text-red-600 dark:text-red-400 inline-block px-3 py-1 bg-red-50 dark:bg-red-900 rounded-full border border-red-100 dark:border-red-700">
-                Message receiving is turned off
+                Feedback receiving is turned off
               </div>
             )}
           </div>

@@ -12,20 +12,19 @@ export async function sendVerificationEmail(
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER, 
+        user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
     });
     const subject = isPasswordReset
-      ? "AnonyChat - Password Reset Request"
-      : "AnonyChat - Verify Your Email Address";
+      ? "Honest-Feedback - Password Reset Request"
+      : "Honest-Feedback - Verify Your Email Address";
 
     const messageIntro = isPasswordReset
       ? "You requested to reset your password. Your verification code is:"
       : "Your verification code is:";
-
     const mailOptions = {
-      from: `"AnonyChat" <${process.env.EMAIL_USER}>`,
+      from: `"Honest-Feedback" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: subject,
       html: `
@@ -36,7 +35,7 @@ export async function sendVerificationEmail(
         <br/>
         <p>If you didn't request this, you can safely ignore this email.</p>
         <br/>
-        <p>Thanks,<br/>The AnonyChat Team</p>
+        <p>Thanks,<br/>The Honest-Feedback Team</p>
       `,
     };
 

@@ -55,10 +55,11 @@ export default function SignInForm() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-background text-foreground transition-colors px-4">
       <div className="w-full max-w-md p-8 space-y-8 bg-card text-card-foreground rounded-lg shadow-lg border transition-colors">
+        {" "}
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-2">Welcome Back</h1>
           <p className="text-muted-foreground text-sm">
-            Sign in to your AnonyChat account
+            Sign in to your Honest-Feedback account
           </p>
         </div>
         <Form {...form}>

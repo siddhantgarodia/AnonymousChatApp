@@ -49,7 +49,7 @@ export async function POST(request: Request) {
       return Response.json(
         {
           success: false,
-          message: "User is not accepting messages.",
+          message: "User is not accepting feedback.",
         },
         { status: 403 }
       );
@@ -62,12 +62,12 @@ export async function POST(request: Request) {
     return Response.json(
       {
         success: true,
-        message: "Message sent successfully.",
+        message: "Feedback sent successfully.",
       },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error sending message:", error);
+    console.error("Error sending feedback:", error);
     return Response.json(
       {
         success: false,

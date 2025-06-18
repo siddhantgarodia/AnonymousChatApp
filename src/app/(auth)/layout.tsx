@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Authentication | AnonChat",
-  description: "Sign in or create an account for AnonChat",
+  title: "Authentication | Honest-Feedback",
+  description: "Sign in or create an account for Honest-Feedback",
 };
 
 export default function AuthLayout({

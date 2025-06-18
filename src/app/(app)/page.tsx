@@ -35,26 +35,26 @@ const Home = () => {
       <main className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground px-4 py-8 transition-colors">
         <section className="text-center max-w-2xl">
           <h1 className="text-4xl font-bold mb-4 transition-colors">
-            Welcome to AnonyChat
+            Welcome to Honest-Feedback
           </h1>
           <p className="text-lg mb-6 text-muted-foreground transition-colors">
-            AnonyChat is a platform for anonymous messaging. Connect with others
-            without revealing your identity.
+            Honest-Feedback is a platform for sharing and receiving anonymous
+            feedback. Connect with others and improve through honest insights.
           </p>
 
           <div className="mt-4 flex justify-center flex-col items-center">
             {!showUsernameInput ? (
               <Button
-                className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2"
+                className="bg-orange-600 hover:bg-orange-700 text-white flex items-center gap-2"
                 onClick={() => setShowUsernameInput(true)}
               >
                 <MessageCircle size={18} />
-                Send Anonymous Message
+                Share Honest Feedback
               </Button>
             ) : (
               <div className="bg-card p-4 rounded-lg border border-border shadow-md w-full max-w-sm">
                 <div className="flex justify-between items-center mb-3">
-                  <h3 className="font-medium">Send Anonymous Message</h3>
+                  <h3 className="font-medium">Share Honest Feedback</h3>
                   <Button
                     variant="ghost"
                     size="sm"
@@ -84,7 +84,7 @@ const Home = () => {
                     )}
                   </div>
                   <Button
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                    className="w-full bg-orange-600 hover:bg-orange-700 text-white"
                     onClick={handleSendMessage}
                   >
                     <MessageCircle size={16} className="mr-2" />
@@ -125,18 +125,6 @@ const Home = () => {
           </Carousel>
         </div>
       </main>
-
-      <footer className="bg-muted text-muted-foreground text-center py-6 transition-colors">
-        <p>&copy; {new Date().getFullYear()} AnonChat. All rights reserved.</p>
-        <p>
-          <a
-            href="/privacy-policy"
-            className="text-primary underline hover:text-primary/80 transition-colors"
-          >
-            Privacy Policy
-          </a>
-        </p>
-      </footer>
     </>
   );
 };

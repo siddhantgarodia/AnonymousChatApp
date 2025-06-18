@@ -8,8 +8,8 @@ export const runtime = "edge";
 export async function POST() {
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
-  const prompt = `Generate 5 open-ended, friendly, and fun questions for an anonymous message platform. 
-Each message should be 30-100 characters. Respond ONLY as a JSON array of strings.
+  const prompt = `Generate 5 open-ended, friendly, and constructive feedback prompts for a feedback platform. 
+Each prompt should be 30-100 characters. Respond ONLY as a JSON array of strings.
 Do NOT include any explanation or markdown formatting like \`\`\`json.`; // forcing no markdown
 
   try {

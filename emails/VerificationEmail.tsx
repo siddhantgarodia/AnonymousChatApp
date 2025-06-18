@@ -33,6 +33,7 @@ export default function VerificationEmail({
           margin: "0 auto",
         }}
       >
+        {" "}
         <Heading
           style={{
             textAlign: "center",
@@ -41,7 +42,7 @@ export default function VerificationEmail({
             margin: "0 0 16px",
           }}
         >
-          Welcome to AnonyChat, {username}!
+          Welcome to Honest-Feedback, {username}!
         </Heading>
         <Text
           style={{
@@ -86,7 +87,7 @@ export default function VerificationEmail({
           }}
         >
           If you did not request this verification, please ignore this email.
-        </Text>
+        </Text>{" "}
         <Text
           style={{
             textAlign: "center",
@@ -95,7 +96,8 @@ export default function VerificationEmail({
             color: "#94a3b8",
           }}
         >
-          &copy; {new Date().getFullYear()} AnonyChat. All rights reserved.
+          &copy; {new Date().getFullYear()} Honest-Feedback. All rights
+          reserved.
         </Text>
       </Section>
     </Html>

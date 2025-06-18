@@ -13,7 +13,7 @@ const Navbar = () => {
   const user = session?.user as User;
 
   return (
-    <nav className="bg-gradient-to-r from-blue-600/90 to-indigo-600/80 dark:from-blue-900/90 dark:to-indigo-900/80 py-4 shadow-sm border-b border-border/40 backdrop-blur-md sticky top-0 z-50">
+    <nav className="bg-gradient-to-r from-blue-600/90 to-sky-600/80 dark:from-blue-900/90 dark:to-sky-900/80 py-4 shadow-sm border-b border-border/40 backdrop-blur-md sticky top-0 z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Left: Logo + Dashboard */}
         <div className="flex items-center gap-4">
@@ -24,11 +24,11 @@ const Navbar = () => {
           >
             <MessageCircle className="w-6 h-6 text-primary" />
             <span className="hidden sm:inline text-xl font-bold tracking-tight text-foreground">
-              <span className="font-extrabold text-foreground">Anony</span>
-              <span className="font-extrabold text-primary">Chat</span>
+              <span className="font-extrabold text-foreground">Honest</span>
+              <span className="font-extrabold text-primary">Feedback</span>
             </span>
             <span className="sm:hidden text-lg font-bold text-foreground">
-              AC
+              HF
             </span>
           </Link>
           {session && (

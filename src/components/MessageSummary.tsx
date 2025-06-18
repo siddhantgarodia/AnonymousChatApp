@@ -32,10 +32,10 @@ export function MessageSummary({ isVisible }: MessageSummaryProps) {
         setSummaryContent(data.text);
         setIsExpanded(true);
       } else if (!res.ok) {
-        throw new Error(data?.message || "Failed to summarize messages");
+        throw new Error(data?.message || "Failed to summarize feedback");
       }
     } catch (err) {
-      console.error("Error summarizing messages:", err);
+      console.error("Error summarizing feedback:", err);
       setError(err instanceof Error ? err : new Error(String(err)));
     } finally {
       setIsLoading(false);

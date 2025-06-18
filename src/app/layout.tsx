@@ -20,8 +20,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AnonyChat - Anonymous Messaging Platform",
-  description: "Send and receive anonymous messages securely with AnonyChat",
+  title: "Honest-Feedback - Anonymous Feedback Platform",
+  description:
+    "Share and receive honest feedback anonymously with Honest-Feedback",
 };
 
 export default function RootLayout({
@@ -53,10 +54,13 @@ export default function RootLayout({
               <main className="flex-grow px-4 md:px-6 py-6">{children}</main>
 
               <footer className="py-4 border-t border-border bg-background/80 backdrop-blur-sm">
+                {" "}
                 <div className="container mx-auto px-4 text-center text-xs sm:text-sm text-muted-foreground">
                   © {new Date().getFullYear()}{" "}
-                  <span className="font-medium text-primary">AnonyChat</span>.
-                  All rights reserved.
+                  <span className="font-medium text-primary">
+                    Honest-Feedback
+                  </span>
+                  . All rights reserved.
                 </div>
               </footer>
 
